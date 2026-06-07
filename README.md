@@ -20,18 +20,32 @@
 
 ### A. 觀測空間 (Observation Space) - 5維連續向量
 環境在每個時間步長（Step，每 5 分鐘為一步，單日共 288 步）向 AI 揭露以下狀態：
-$$S = [Active\_Pods, Pending\_Pods, RPS, CPU\_Util, Latency]$$
+
+$$
+S = [Active\_Pods, Pending\_Pods, RPS, CPU\_Util, Latency]
+$$
 
 ### B. 排隊理論與 CPU 利用率公式
-系統中單台 Pod 的最大處理能力設定為 $100.0 \text{ RPS}$。整體的系統硬體利用率（CPU Utilization）並非線性，而是受外部當前請求數（RPS）與當前就緒 Pod 總運算能力的拉鋸所決定：
-$$CPU\_Util = \min\left(100.0, \max\left(0.0, \frac{RPS}{Active\_Pods \times 100.0} \times 100\% \right)\right)$$
+系統中單台 Pod 的最大處理能力設定為 100.0 RPS。整體的系統硬體利用率（CPU Utilization）並非線性，而是受外部當前請求數（RPS）與當前就緒 Pod 總運算能力的拉鋸所決定：
+
+$$
+CPU\_Util = \min\left(100.0, \max\left(0.0, \frac{RPS}{Active\_Pods \times 100.0} \times 100\% \right)\right)
+$$
 
 ### C. 微服務延遲 (Latency) 指數級雪崩模型
 當系統負載安全時，延遲維持在基本物理基線（20ms 左右）；然而一旦 CPU 利用率逼近 95% 臨界點，網路緩衝區排隊隊伍將會崩潰，延遲呈現**非線性指數級暴衝**，完美還原真實分散式系統的「滅頂現象」：
-* 當 $CPU\_Util < 95.0\%$：
-  $$Latency = 20.0 + \left(\frac{CPU\_Util}{100.0 - CPU\_Util}\right) \times 10.0 \text{ (ms)}$$
-* 當 $CPU\_Util \ge 95.0\%$：
-  $$Latency = 20.0 + \left(\frac{95.0}{5.0}\right) \times 10.0 + (CPU\_Util - 95.0) \times 100.0 \text{ (ms)}$$
+
+* 當 $CPU\_Util < 95.0\%$ 時：
+
+$$
+Latency = 20.0 + \left(\frac{CPU\_Util}{100.0 - CPU\_Util}\right) \times 10.0 \text{ (ms)}
+$$
+
+* 當 $CPU\_Util \ge 95.0\%$ 時：
+
+$$
+Latency = 20.0 + \left(\frac{95.0}{5.0}\right) \times 10.0 + (CPU\_Util - 95.0) \times 100.0 \text{ (ms)}
+$$
 
 ---
 
@@ -64,7 +78,7 @@ $$CPU\_Util = \min\left(100.0, \max\left(0.0, \frac{RPS}{Active\_Pods \times 100
 > 📊 **關於統計基數稀釋的學術澄清**：乍看之下兩者得分接近，是因為全天 288 步包含了龐大且不可避的「背景固定雲端基礎租金基數」（約 3.5 萬分）。扣除此不可避基本開銷後，**DRL AI 在 Cost 賽道上實質優化了高達 75.1% 的非必要營運開銷**；在 SLA 賽道上更是達成了 **「完美零事故」** 的本質差別。
 
 ### 📉 雙 Y 軸實驗數據可視化
-本專案運行結束後會自動在根目錄下輸出兩張 **300 DPI 高解析度學術圖表**，清晰記錄流量 RPS、Pod 數量、CPU 利用率與 Latency 三位一體的動態變化：
+本專案運行結束後會自動在根目錄下輸出兩張 **300 DPI 高解析度學術圖表**，清晰記錄流量 RPS、Pod 數量、CPU 利用率與 Latency 三位一體動態變化：
 
 <p align="center">
   <img src="experiment_a_sla_priority.png" width="49%" />
@@ -81,8 +95,6 @@ $$CPU\_Util = \min\left(100.0, \max\left(0.0, \frac{RPS}{Active\_Pods \times 100
 ├── experiment_a_sla_priority.png # 實驗 A (SLA優先土豪型) 雙 Y 軸三階科學數據圖表 (自動生成)
 ├── experiment_b_cost_priority.png# 實驗 B (Cost敏感鐵公雞) 雙 Y 軸三階科學數據圖表 (自動生成)
 └── README.md                     # 本說明文件
-
-
 
 🛠️ 6. 快速開始與重現實驗 (Quick Start)
 1. 環境配置
