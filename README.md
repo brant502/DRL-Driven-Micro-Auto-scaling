@@ -29,7 +29,7 @@ $$
 系統中單台 Pod 的最大處理能力設定為 100.0 RPS。整體的系統硬體利用率（CPU Utilization）並非線性，而是受外部當前請求數（RPS）與當前就緒 Pod 總運算能力的拉鋸所決定：
 
 $$
-CPU\_Util = \min\left(100.0, \max\left(0.0, \frac{RPS}{Active\_Pods \times 100.0} \times 100\% \right)\right)
+CPU\_Util = \min\left(100.0, \max\left(0.0, \frac{RPS}{Active\_Pods \times 100.0} \times 100.0 \right)\right)
 $$
 
 ### C. 微服務延遲 (Latency) 指數級雪崩模型
