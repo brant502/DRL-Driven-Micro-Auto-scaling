@@ -81,8 +81,8 @@ $$
 本專案運行結束後會自動在根目錄下輸出兩張 **300 DPI 高解析度學術圖表**，清晰記錄流量 RPS、Pod 數量、CPU 利用率與 Latency 三位一體動態變化：
 
 <p align="center">
-  <img src="experiment_a_sla_priority.png" width="49%" />
-  <img src="experiment_b_cost_priority.png" width="49%" />
+  <img src="experiment_a_sla_priority.png.png" width="49%" alt="Experiment A: SLA Priority" />
+  <img src="experiment_b_cost_priority.png.png" width="49%" alt="Experiment B: Cost Sensitive" />
 </p>
 
 ---
