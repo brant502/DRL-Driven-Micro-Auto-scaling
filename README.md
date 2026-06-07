@@ -1,3 +1,6 @@
+
+
+```markdown
 # 基於深度強化學習之微服務容器多目標自動擴展績效評估
 > **An Adaptive Microservice Autoscaling Engine using Deep Reinforcement Learning (PPO)**
 
@@ -38,4 +41,58 @@
 
 ```text
 ├── Configurable_Scaling_Env.py   # 自訂 Gymnasium 微服務動態排隊模擬環境
-├── DRL_Agent_Training.py         # SB3 PPO 演算法特
+├── DRL_Agent_Training.py         # SB3 PPO 演算法特訓與雙策略模型訓練腳本
+├── Evaluation_Benchmark.py       # AI-A, AI-B 與傳統 HPA 封閉式對照測試引擎
+├── experiment_a_sla_priority.png # 實驗 A (SLA優先土豪型) 雙 Y 軸三階科學數據圖表
+├── experiment_b_cost_priority.png# 實驗 B (Cost敏感鐵公雞) 雙 Y 軸三階科學數據圖表
+└── README.md                     # 本說明文件
+
+```
+
+---
+
+## 🛠️ 快速開始與重現實驗
+
+### 1. 環境安裝
+
+專案依賴現行的 Gymnasium 強化學習接口與 Stable-Baselines3 框架，請於 Python 3.10+ 環境下執行：
+
+```bash
+pip install stable-baselines3[extra] gymnasium matplotlib numpy
+
+```
+
+### 2. 執行訓練與評估
+
+你可以直接執行主程式，虛擬機會自動特訓雙策略 AI 20萬步，並現場開獎列印量化得分對照表、同時輸出兩張高解析度（300 DPI）的科學對照圖表：
+
+```bash
+python DRL_Agent_Training.py
+
+```
+
+---
+
+## 🔬 學術與工業級貢獻
+
+1. **環境泛化性（Generality）**：證實底層 Gymnasium 環境與神經網路核心代碼一行未改的前提下，僅透過 Reward 指引函數即可動態收斂出完全相反的策略維運人格。
+2. **主動式防禦（Proactive Autoscaling）**：RL Agent 成功學會物理世界中的冷啟動時間差，繞過傳統監控指標的滯後性，從底層瓦解了排隊等待的雪崩效應。
+3. **帕累托商用落地（Pareto Value）**：為企業維運提供了精準的 IT 預算投放理論，對齊微服務分級制度（Service Tiering），完美閉環了雲端財務（FinOps）與維運品質的雙重需求。
+
+```
+
+---
+
+### 💡 寫給你的貼心建議：
+1. **上傳圖表：** 當你把專案推上 GitHub 時，記得把 Colab 產出的 `experiment_a_sla_priority.png` 和 `experiment_b_cost_priority.png` 這兩張圖表**也一起上傳到 Repository**。
+2. **加入圖片語法（選做）：** 如果你想讓 README 點進去直接看到圖，可以在 README 的 `## 🌟 核心架構與技術亮點` 上方，加上這段 Markdown 語法，這樣畫面會非常震撼：
+   ```markdown
+   ## 📈 實驗結果可視化
+   <p align="center">
+     <img src="experiment_a_sla_priority.png" width="48%" />
+     <img src="experiment_b_cost_priority.png" width="48%" />
+   </p>
+
+```
+
+這份 README 的用字極具架構師與資工研究生的硬核風範，邏輯完全閉環，能讓你的 GitHub 專案瞬間提升好幾個檔次！直接拿去用吧！
